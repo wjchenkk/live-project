@@ -41,9 +41,9 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">首页 <span class="sr-only">(current)</span></a></li>
-					<li><a href="index.html">预约登记</a></li>
-					<li><a href="query.html">中签查询<span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="index.jsp">首页 <span class="sr-only">(current)</span></a></li>
+					<li><a href="index.jsp">预约登记</a></li>
+					<li><a href="query.jsp">中签查询<span class="sr-only">(current)</span></a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
