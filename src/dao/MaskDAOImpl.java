@@ -14,27 +14,27 @@ public class MaskDAOImpl implements MaskDAO {
 		// TODO Auto-generated method stub
 		int x1,x2,x3;
 		String sql = "insert into registration values(? ,? ,? ,? ,? ,null,?)";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, bean.getID());
-            ps.setString(2, bean.getTel());
-            ps.setString(3, bean.getName());
-            x1 = Integer.parseInt(bean.getNumber());
-            x2 = Integer.parseInt(bean.getReserveNum());
-            x3 = Integer.parseInt(bean.getStatus());
-            ps.setInt(4, x1);
-            ps.setInt(5, x2);
-            ps.setInt(6, x3);
-            ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                String y = String.valueOf(id);
-                bean.setWinningNum(y);
-            }
-        } 
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+        	try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            		ps.setString(1, bean.getID());
+            		ps.setString(2, bean.getTel());
+            		ps.setString(3, bean.getName());
+            		x1 = Integer.parseInt(bean.getNumber());
+            		x2 = Integer.parseInt(bean.getReserveNum());
+            		x3 = Integer.parseInt(bean.getStatus());
+            		ps.setInt(4, x1);
+            		ps.setInt(5, x2);
+            		ps.setInt(6, x3);
+            		ps.execute();
+            		ResultSet rs = ps.getGeneratedKeys();
+            		if (rs.next()) {
+                		int id = rs.getInt(1);
+                		String y = String.valueOf(id);
+                		bean.setWinningNum(y);
+            		}
+        	} 
+        	catch (SQLException e) {
+            		e.printStackTrace();
+        	}
 	}
 
 	@Override
@@ -42,14 +42,14 @@ public class MaskDAOImpl implements MaskDAO {
 		// TODO Auto-generated method stub
 		int x1;
 		String sql = "update registration set status=? where getnumber=?";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-        	x1 = Integer.parseInt(status);
-        	ps.setInt(1, x1);
-        	ps.setInt(2, id);
-        	ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        	try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+        		x1 = Integer.parseInt(status);
+        		ps.setInt(1, x1);
+        		ps.setInt(2, id);
+        		ps.executeUpdate();
+        	} catch (SQLException e) {
+            		e.printStackTrace();
+        	}
 	}
 
 	@Override
@@ -59,17 +59,17 @@ public class MaskDAOImpl implements MaskDAO {
 		String sql = "select * from registration where getnumber=?";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-            	users.setName(rs.getString("name"));
-            	users.setID(rs.getString("id"));
-            	users.setTel(rs.getString("tel"));
-            	users.setNumber(rs.getString("number"));
-            }
-        } 
+            		ResultSet rs = ps.executeQuery();
+            		while (rs.next()) {
+            			users.setName(rs.getString("name"));
+            			users.setID(rs.getString("id"));
+            			users.setTel(rs.getString("tel"));
+            			users.setNumber(rs.getString("number"));
+            		}
+        	} 
 		catch (SQLException e) {
-            e.printStackTrace();
-        }
+            		e.printStackTrace();
+        	}
 		return users;
 	}
 
@@ -80,14 +80,14 @@ public class MaskDAOImpl implements MaskDAO {
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setString(1, id);
 			ps.setInt(2, times);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-            	return true;
-            }
-        } 
+            		ResultSet rs = ps.executeQuery();
+            		while (rs.next()) {
+            			return true;
+            		}
+       	 	}	 
 		catch (SQLException e) {
-            e.printStackTrace();
-        }
+           		e.printStackTrace();
+        	}
 		return false;
 	}
 
@@ -98,14 +98,14 @@ public class MaskDAOImpl implements MaskDAO {
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setString(1, tel);
 			ps.setInt(2, times);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-            	return true;
-            }
-        } 
+            		ResultSet rs = ps.executeQuery();
+            		while (rs.next()) {
+            			return true;
+            		}
+        	}	 
 		catch (SQLException e) {
-            e.printStackTrace();
-        }
+            		e.printStackTrace();
+        	}
 		return false;
 	}
 	
