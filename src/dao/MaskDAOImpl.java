@@ -27,7 +27,7 @@ public class MaskDAOImpl implements MaskDAO {
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                int id = rs.getInt(6);
+                int id = rs.getInt(1);
                 String y = String.valueOf(id);
                 bean.setWinningNum(y);
             }
@@ -59,7 +59,7 @@ public class MaskDAOImpl implements MaskDAO {
 		String sql = "select * from registration where getnumber=?";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             	users.setName(rs.getString("name"));
             	users.setID(rs.getString("id"));
@@ -80,7 +80,7 @@ public class MaskDAOImpl implements MaskDAO {
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setString(1, id);
 			ps.setInt(2, times);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             	return true;
             }
@@ -98,7 +98,7 @@ public class MaskDAOImpl implements MaskDAO {
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setString(1, tel);
 			ps.setInt(2, times);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             	return true;
             }
