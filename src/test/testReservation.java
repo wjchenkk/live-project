@@ -10,13 +10,13 @@ public class testReservation extends junit.framework.TestCase {
 
     @Test 
 	public void testRegistration() {
-        final String reserveNum1 = "1";
+        final int reserveNum1 = 1;
         final String name1 = "张三";
         final String ID1 = "62010419980911027X";
         final String tel1 = "13110513356";
-        final String number1 = "10000";
-        final String status1 = "0";
-        final String winningNum1 = "213";
+        final int number1 = 10000;
+        final int status1 = 0;
+        final int winningNum1 = 213;
         final String updateTel1 = "13919347896";
 
         //测试带全部参数的构造函数
@@ -27,16 +27,16 @@ public class testReservation extends junit.framework.TestCase {
         reservation1.setTel(updateTel1);
         assertEquals(updateTel1, reservation1.getTel());
 
-        final String reserveNum2 = "1";
+        final int reserveNum2 = 1;
         final String name2 = "李四";
         final String ID2 = "620104199809111134";
         final String tel2 = "18259317408";
-        final String number2 = "99";
+        final int number2 = 99;
 
         //测试不带 "status" 和 "winningNum" 的构造函数
         Reservation reservation2 = new Reservation(reserveNum2,
             name2, ID2, tel2, number2);
-        assertEquals("0", reservation2.getStatus());
-        assertEquals("", reservation2.getWinningNum());
+        assertEquals(0, reservation2.getStatus());
+        assertEquals(0, reservation2.getWinningNum());
     }    
 }

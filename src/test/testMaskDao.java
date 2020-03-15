@@ -12,11 +12,11 @@ public class testMaskDao extends junit.framework.TestCase{
     //测试add(Reservation bean)方法
     @Test
     public void testAdd() {
-        final String reserveNum = "1";
+        final int reserveNum = 1;
         final String name = "张三";
         final String ID = "62010419980911027X";
         final String tel = "13110513356";
-        final String number = "10000";
+        final int number = 10000;
 
         MaskDAOImpl maskDao = new MaskDAOImpl();
         Reservation reservation = new Reservation(reserveNum, name, ID, tel, number);
@@ -35,7 +35,7 @@ public class testMaskDao extends junit.framework.TestCase{
     //测试list(int id)方法
     @Test
     public void testList() {
-        final int id = 1;
+        final String id = "1";
         MaskDAOImpl maskDao = new MaskDAOImpl();
         maskDao.list(id);
     }
@@ -43,7 +43,7 @@ public class testMaskDao extends junit.framework.TestCase{
     //测试query(String id, int times)方法
     @Test
     public void testQuery() {
-        final String id = "12";
+        final String id = "13";
         final int times = 1;
         MaskDAOImpl maskDao = new MaskDAOImpl();
         assertTrue(maskDao.query(id, times));
