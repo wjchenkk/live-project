@@ -19,10 +19,9 @@
 </head>
 <body>
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script src="jquery-3.3.1.js"></script>
+	<script src="js/jquery-3.3.1.js"></script>
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script src="js/bootstrap.js"></script>
-
 	<!-- 导航栏 -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -42,8 +41,8 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="index.html">首页 <span class="sr-only">(current)</span></a></li>
-					<li><a href="index.html">预约登记</a></li>
-					<li><a href="query.html">中签查询<span class="sr-only">(current)</span></a></li>
+					<li><a href="index.jsp">预约登记</a></li>
+					<li><a href="query.jsp">中签查询<span class="sr-only">(current)</span></a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -61,41 +60,55 @@
 			<!-- 标签内容 -->
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane fade in active" id="home">
-						<form action="indexRe.jsp" method="post">
+						<form action="order" method="post">
 							<div class="form-group">
 							  <label>真实姓名</label>
-							  <input class="form-control" id="exampleInputName" placeholder="Name">
+							  <input class="form-control" id="exampleInputName" placeholder="Name" name="name">
 							</div>
 							<div class="form-group">
 							  <label>身份证号</label>
-							  <input class="form-control" id="IDnum" placeholder="ID Card">
+							  <input class="form-control" id="IDnum" placeholder="ID Card" name="ID">
 								<p id="mes2" class="mes">请输入正确的身份证号！</p>
 							</div>
 							<div class="form-group">
 								<label>手机号</label>
-								<input class="form-control" id="PhoneNum" placeholder="Phone Num">
+								<input class="form-control" id="PhoneNum" placeholder="Phone Num" name="Phone">
 								<p id="mes3" class="mes">请输入正确的手机号！</p>
 							  </div>
 							  <div class="form-group">
 								<label for="exampleInputPassword1">预约口罩数量（不得超过3个）</label>
-								<select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
+								<select class="form-control" name="num">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
 								  </select>
 							  </div>
 							<button type="submit" class="btn btn-primary">提交预约</button>
 						  </form>
+
+					
 				</div>
+				<%
+				
+					String status = (String)request.getAttribute("status");
+					if(status!=null&&status.equals("success")){
+						int record=(int)request.getAttribute("record");
+				%>
+				<div class="alert alert-success">成功！很好地完成了提交，编号：<%=record %></div>
+				<%}else{ %>
+				<div class="alert alert-success">提交失败</div>
+				<%} %>
 				<div role="tabpanel" class="tab-pane fade" id="profile">
-					<button type="button" class="btn btn-warning">结束当前预约</button>
-					<form style="margin-top: 25px;">
+					<form action="sub.jsp" action="post" style="margin-top: 25px;">
 					<div class="form-group">
-						<label>口罩数量</label>
-						<input type="number" class="form-control" id="exampleInputName" placeholder="Num" style="margin-bottom: 10px;">
-						<button type="submit" class="btn btn-success">开始新的预约</button>
+								  <label>口罩数量</label>
+								  <input type="number" class="form-control" id="exampleInputName" placeholder="50" style="margin-bottom: 10px;">
+								  <!-- <button type="submit" class="btn btn-success">开始新的预约</button> -->
+								  <button type="submit" class="btn btn-success"> 开始新的预约</button>  
+							  </div>
 					</form>
-				</div>
+					<a href="out" class="btn btn-warning"> 结束当前预约</a>
+					</div>
 			</div>
 			
 		</div>

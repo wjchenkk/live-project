@@ -40,15 +40,19 @@ public class NextServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
         //进行下一轮
-		int total=Integer.parseInt(request.getParameter("total"));
+		String total=(String)request.getParameter("total");
+		if(total==null||total.equals(""))total="50";
+		int total1 = Integer.parseInt(total);
 		HttpSession session = request.getSession();
-		session.setAttribute("flag", "begin");
-		CampaignDAO campaignDAO=new CampaignDAOImpl();
-		Campaign c=new Campaign();
-		c.setTimes(campaignDAO.get().getTimes()+1);
-		c.setTotal(total);
-		campaignDAO.add(c);
-		request.setAttribute("times",campaignDAO.getTimes());
+		if (session.getAttribute("flag") == null) {
+			session.setAttribute("flag", "begin");
+			CampaignDAO campaignDAO = new CampaignDAOImpl();
+			Campaign c = new Campaign();
+			c.setTimes(campaignDAO.get().getTimes() + 1);
+			c.setTotal(total1);
+			campaignDAO.add(c);
+			session.setAttribute("times", campaignDAO.getTimes());
+		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

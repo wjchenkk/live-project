@@ -18,42 +18,51 @@ import pojo.Reservation;
 @WebServlet("/select")
 public class SelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SelectServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public SelectServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String flag = (String) session.getAttribute("flag");
-		String id=request.getParameter("id");
+		String id = request.getParameter("id");
+		if(id==null||id.equals(""))id="-1";
 		if (flag != null && flag.equals("end")) {
-			MaskDAO maskDAO=new MaskDAOImpl();
-			Reservation r=maskDAO.get(Integer.parseInt(id));
-			request.setAttribute("result","success");
-			request.setAttribute("name", r.getName());
-			request.setAttribute("id",r.getID());
-			request.setAttribute("tel",r.getTel());
-			request.setAttribute("number",r.getNumber());
-		}
-		else {
-			request.setAttribute("result","fail");
+			MaskDAO maskDAO = new MaskDAOImpl();
+			Reservation r = maskDAO.get(Integer.parseInt(id));
+			if (r.getStatus() == 2) {
+				request.setAttribute("result", "success");
+				request.setAttribute("name", r.getName());
+				request.setAttribute("id", r.getID());
+				request.setAttribute("tel", r.getTel());
+				request.setAttribute("number", r.getNumber());
+			}
+			else {
+				request.setAttribute("result", "fail");
+			}
+		} else {
+			request.setAttribute("result", "fail");
 		}
 		request.getRequestDispatcher("query.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

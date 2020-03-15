@@ -40,24 +40,26 @@ public class OrderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String flag = (String) session.getAttribute("flag");
 		String name = request.getParameter("name");
-		String id = request.getParameter("id");
-		String tel = request.getParameter("tel");
-		String number = request.getParameter("number");
-		String times = request.getParameter("times");
-		int id_n = Integer.parseInt(id);
-		int times_n = Integer.parseInt(times);
+		String id = request.getParameter("ID");
+		String tel = request.getParameter("Phone");
+		String number = request.getParameter("num");
+		boolean valid=true;
+		if(id==null||id.equals(""))valid=false;
+		if(name==null||name.equals(""))valid=false;
+		if(tel==null||tel.equals(""))valid=false;
+		if(number==null||number.equals(""))valid=false;
 		boolean fl = true;
 		String result = "fail";
 		MaskDAO maskDAO = new MaskDAOImpl();
-		if (flag != null && flag.equals("begin")) {
+		if (flag != null && flag.equals("begin")&&valid) {
+			int times_n = (int)session.getAttribute("times");
 			// 前三天的状况
-			if (id_n > 0) {
-				for (Reservation r : maskDAO.list(id)) {
-					if (r.getStatus() == 2) {
-						fl = false;
-					}
+			for (Reservation r : maskDAO.list(id)) {
+				if (r.getStatus() == 2) {
+					fl = false;
 				}
 			}
+
 			// 预约成功
 			if (!maskDAO.query(id, times_n) && fl) {
 				Reservation Order_ = new Reservation();// 轮次，身份证号，电话，口罩数量
@@ -68,14 +70,13 @@ public class OrderServlet extends HttpServlet {
 				Order_.setNumber(Integer.parseInt(number));
 				maskDAO.add(Order_);
 				result = "success";
-				Order_=maskDAO.get(id,times_n);
+				Order_ = maskDAO.get(id, times_n);
 				request.setAttribute("record", Order_.getWinningNum());
 			} else {
-				result = "fail1";
+				result = "fail";
 			}
-		}
-		else {
-			result="fail2";
+		} else {
+			result = "fail";
 		}
 		// 是否预约成功
 		request.setAttribute("status", result);

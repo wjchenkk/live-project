@@ -9,15 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 import dao.CampaignDAO;
 import dao.CampaignDAOImpl;
 import dao.MaskDAO;
 import dao.MaskDAOImpl;
 import pojo.Campaign;
 import pojo.Reservation;
-
 
 /**
  * Servlet implementation class test
@@ -43,18 +40,19 @@ public class OutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String times = request.getParameter("times");
+		// String times = request.getParameter("times");
 		HttpSession session = request.getSession();
 		session.setAttribute("flag", "end");
+		int times = (int) session.getAttribute("times");
 		CampaignDAO campaignDAO = new CampaignDAOImpl();
-		int times_n = Integer.parseInt(times);
 		int ran1 = (int) (Math.random() * 3);
 		String result = "fail";
 		MaskDAO maskDAO = new MaskDAOImpl();
-		Reservation[] rs = maskDAO.getList(times_n);
+		Reservation[] rs = maskDAO.getList(times);
+		int cnt = rs.length;
 		Campaign c = campaignDAO.get();
 		int sum_n = c.getTotal();
-		while (sum_n >= 0) {
+		while (sum_n >= 0 && cnt != 0) {
 			for (Reservation R : rs) {
 				ran1 = (int) (Math.random() * 3);
 				int id_n = R.getWinningNum();
@@ -64,6 +62,7 @@ public class OutServlet extends HttpServlet {
 					if (ran1 < 1 && sum_n >= num) {
 						maskDAO.update(id_n, "2");
 						sum_n = sum_n - num;
+						cnt--;
 					} else {
 						maskDAO.update(id_n, "1");
 					}
@@ -73,6 +72,7 @@ public class OutServlet extends HttpServlet {
 		c.setTotal(sum_n);
 		campaignDAO.update(c);
 		request.setAttribute("status", result);
+		session.setAttribute("times", -1);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

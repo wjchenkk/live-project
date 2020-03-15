@@ -51,10 +51,10 @@
 				<!-- 标签内容 -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="home">
-							<form>
-								<div class="form-group">
+							<form action="select" method="post">
+								<div class="form-group" >
 								  <label>预约编号</label>
-								  <input class="form-control" id="exampleInputName" placeholder="Number">
+								  <input class="form-control" id="exampleInputName" placeholder="Number" name="id">
 								</div>
 								<button type="submit" class="btn btn-primary">提交查询</button>
 							  </form>
@@ -69,12 +69,17 @@
 								<th>手机号</th>
 								<th>购买数量</th>
 							</tr>
+							<%
+							String result=request.getParameter("result");
+							if(result!=null&&result.equals("success")){
+							%>		
 							<tr>
-								<td>45</td>
-								<td>45</td>
-								<th>12</th>
-								<th>12</th>
-							</tr>
+								<td><%=request.getAttribute("name") %>><td>
+								<td><%=request.getAttribute("id") %>><td>
+								<td><%=request.getAttribute("tel") %>><td>
+								<td><%=request.getAttribute("number") %>><td>
+							<tr>	
+							<% }%>
 						  </table>
 					</div>
 				</div>
