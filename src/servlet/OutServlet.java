@@ -1,13 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.OBJ_ADAPTER;
 
-import com.sun.java_cup.internal.runtime.virtual_parse_stack;
 
 import dao.CampaignDAO;
 import dao.CampaignDAOImpl;
@@ -27,7 +18,6 @@ import dao.MaskDAOImpl;
 import pojo.Campaign;
 import pojo.Reservation;
 
-import java.util.Random;
 
 /**
  * Servlet implementation class test
@@ -66,6 +56,7 @@ public class OutServlet extends HttpServlet {
 		int sum_n = c.getTotal();
 		while (sum_n >= 0) {
 			for (Reservation R : rs) {
+				ran1 = (int) (Math.random() * 3);
 				int id_n = R.getWinningNum();
 				int num = R.getNumber();
 				int status = R.getStatus();
