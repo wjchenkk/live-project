@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +147,30 @@ public class MaskDAOImpl implements MaskDAO {
 		String sql = "select * from registration where getnumber = ?";
 		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setInt(1, getNumber);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				record.setName(rs.getString("name"));
+				record.setID(rs.getString("id"));
+				record.setTel(rs.getString("tel"));
+				record.setNumber(rs.getInt("number"));
+				record.setStatus(rs.getInt("status"));
+				record.setWinningNum(rs.getInt("getnumber"));
+				record.setReserveNum(rs.getInt("times"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return record;
+	}
+
+	@Override
+	public Reservation get(String id, int times) {
+		// TODO Auto-generated method stub
+		Reservation record = new Reservation();
+		String sql = "select * from registration where id = ? and times= ?";
+		try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			ps.setString(1, id);
+			ps.setInt(2, times);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				record.setName(rs.getString("name"));

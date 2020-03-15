@@ -10,4 +10,5 @@ public interface MaskDAO {
     boolean query(String id,int times);//判断单次预约轮次预约有且仅有一次成功
     boolean queryTel(String tel,int times);//判断单次预约轮次预约有且仅有一次成功
     Reservation get(int getNumber);//获取单条记录
+    Reservation get(String id,int times);//获取单条记录
 }

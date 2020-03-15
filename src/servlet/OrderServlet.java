@@ -68,6 +68,8 @@ public class OrderServlet extends HttpServlet {
 				Order_.setNumber(Integer.parseInt(number));
 				maskDAO.add(Order_);
 				result = "success";
+				Order_=maskDAO.get(id,times_n);
+				request.setAttribute("record", Order_.getWinningNum());
 			} else {
 				result = "fail1";
 			}
