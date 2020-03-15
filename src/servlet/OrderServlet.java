@@ -1,15 +1,6 @@
 package servlet;
 
-import java.util.Random;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.OBJ_ADAPTER;
-
-import dao.CampaignDAO;
-import dao.CampaignDAOImpl;
 import dao.MaskDAO;
 import dao.MaskDAOImpl;
 // import dao.ProvinceDAOImpl;
