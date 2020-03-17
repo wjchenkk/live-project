@@ -38,10 +38,10 @@ public class SelectServlet extends HttpServlet {
 		String flag = (String) session.getAttribute("flag");
 		String id = request.getParameter("id");
 		if(id==null||id.equals(""))id="-1";
-		if (flag != null && flag.equals("end")) {
+		if (flag == null || flag.equals("end")) {
 			MaskDAO maskDAO = new MaskDAOImpl();
 			Reservation r = maskDAO.get(Integer.parseInt(id));
-			if (r.getStatus() == 2) {
+			if (r!=null&&r.getStatus() == 2) {
 				request.setAttribute("result", "success");
 				request.setAttribute("name", r.getName());
 				request.setAttribute("id", r.getID());

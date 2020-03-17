@@ -44,7 +44,7 @@ public class NextServlet extends HttpServlet {
 		if(total==null||total.equals(""))total="50";
 		int total1 = Integer.parseInt(total);
 		HttpSession session = request.getSession();
-		if (session.getAttribute("flag") == null) {
+		if (session.getAttribute("flag") == null||session.getAttribute("flag").equals("end")) {
 			session.setAttribute("flag", "begin");
 			CampaignDAO campaignDAO = new CampaignDAOImpl();
 			Campaign c = new Campaign();

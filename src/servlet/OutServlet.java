@@ -64,6 +64,9 @@ public class OutServlet extends HttpServlet {
 						sum_n = sum_n - num;
 						cnt--;
 					} else {
+						if (ran1 < 1 && sum_n < num && sum_n > 0) {
+							cnt--;
+						}
 						maskDAO.update(id_n, "1");
 					}
 				}
@@ -73,7 +76,7 @@ public class OutServlet extends HttpServlet {
 		campaignDAO.update(c);
 		request.setAttribute("status", result);
 		session.setAttribute("times", -1);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("query.jsp").forward(request, response);
 	}
 
 	/**
